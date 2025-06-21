@@ -1,7 +1,8 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
@@ -50,35 +51,10 @@ def fetch_fda_approvals():
 def home():
     ema = fetch_ema_approvals()
     fda = fetch_fda_approvals()
-
-    html = """
-    <h1>Daily EMA & FDA Submissions and Approvals</h1>
-    <h2>EMA (Europe)</h2>
-    {% if ema %}
-        <ul>
-        {% for title, link in ema %}
-            <li><a href="{{ link }}" target="_blank">{{ title }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No updates today.</p>
-    {% endif %}
-    <h2>FDA (USA)</h2>
-    {% if fda %}
-        <ul>
-        {% for item in fda %}
-            <li>{{ item }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No updates today.</p>
-    {% endif %}
-    """
-    return render_template_string(html, ema=ema, fda=fda)
-
-import os
+    current_date = datetime.now().strftime("%B %d, %Y")
+    
+    return render_template("index.html", ema=ema, fda=fda, current_date=current_date)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
-
