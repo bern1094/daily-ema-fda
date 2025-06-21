@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Daily EMA & FDA Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .no-updates {
+            font-style: italic;
+            color: #888;
+        }
+        footer {
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #aaa;
+            text-align: center;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily EMA & FDA Submissions and Approvals</h1>
+
+    <h2>EMA (Europe)</h2>
+    {% if ema %}
+        <ul>
+        {% for title, link in ema %}
+            <li><a href="{{ link }}" target="_blank" rel="noopener">{{ title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-updates">No updates today.</p>
+    {% endif %}
+
+    <h2>FDA (USA)</h2>
+    {% if fda %}
+        <ul>
+        {% for item in fda %}
+            <li>{{ item }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-updates">No updates today.</p>
+    {% endif %}
+
+    <footer>
+        Updated daily by your AI agent &mdash; {{ current_date }}
+    </footer>
+</body>
+</html>
