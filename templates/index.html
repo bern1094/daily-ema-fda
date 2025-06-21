@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Daily EMA & FDA Report</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -72,7 +73,7 @@
     {% endif %}
 
     <footer>
-        Updated daily by your AI agent — {{ agent_name }} &mdash; {{ current_date }}
+        Updated daily by {{ agent_name }} &mdash; {{ current_date }}
     </footer>
 </body>
 </html>
