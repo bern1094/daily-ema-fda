@@ -52,8 +52,9 @@ def home():
     ema = fetch_ema_approvals()
     fda = fetch_fda_approvals()
     current_date = datetime.now().strftime("%B %d, %Y")
+    agent_name = "RegWise AI agent"
     
-    return render_template("index.html", ema=ema, fda=fda, current_date=current_date)
+    return render_template("index.html", ema=ema, fda=fda, current_date=current_date, agent_name=agent_name)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
